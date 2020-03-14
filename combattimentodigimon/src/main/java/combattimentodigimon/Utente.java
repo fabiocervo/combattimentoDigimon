@@ -2,7 +2,7 @@ package combattimentodigimon;
 
 public class Utente {
 private String id;
-private String nome;
+private String nome; 
 
 
 public Utente(String id, String nome) {

@@ -3,7 +3,7 @@ package combattimentodigimon;
 public class Digimon {
 	private String nome;
 	private int atk;
-	private int def;
+	private int def; 
 	private int res;
 	private int hp;
 	private String evo;
