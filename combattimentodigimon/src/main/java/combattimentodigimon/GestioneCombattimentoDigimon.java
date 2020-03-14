@@ -21,4 +21,6 @@ public class GestioneCombattimentoDigimon {
 		int res = (int) ((int) 5 + (Math.random() * 6));
 		return res;
 	}
+	
+	
 }

@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -46,7 +48,7 @@ public class MainCreazione {
 
 			case 3: {
 
-				creaPartita();
+				creaPartita(connessione, scanner);
 
 				break;
 			}
@@ -75,9 +77,72 @@ public class MainCreazione {
 
 	}
 	
-	private static void creaPartita() {
+	public static String chiamaGiocatori(Connection connessione, Scanner scanner)throws SQLException {
+		PreparedStatement prepareStatement = connessione.prepareStatement("select distinct idutente from digimon;");
+		ResultSet executeQuery = prepareStatement.executeQuery();
+		List<String>listaUtenti = new ArrayList<>();
+		while (executeQuery.next()) {
+			String id = executeQuery.getString(1);
+			listaUtenti.add(id);
+		}
+		System.out.println("indica l'id del giocatore da selezionare");
+	
+		for (String string : listaUtenti) {
+			System.out.println(string);
+		}
+		
+		String idCreatorePartita = scanner.nextLine();
+		
+		if (listaUtenti.contains(idCreatorePartita)) {
+			
+			return idCreatorePartita;
+		}
+		
+		else {
+			System.out.println("riprova");
+			return null;
+		}
+	
+	}
+	
+	
+	
+	private static void creaPartita(Connection connessione, Scanner scanner) throws SQLException {
+		System.out.println("dammi la password per accedere alla partita");
+		String password = scanner.nextLine();
+		Partita p1 = new Partita(password, chiamaGiocatori(connessione, scanner), chiamaGiocatori(connessione, scanner), 
+				chiamaDigimonGiocatore1(), chiamaDigimonGiocatore1(), chiamaDigimonGiocatore1(), 
+				chiamaDigimonGiocatore2(), chiamaDigimonGiocatore2(), chiamaDigimonGiocatore2());
+	
+			popolamentoPartita();
+		
+		
 		
 	}
+
+
+
+	private static int chiamaDigimonGiocatore2() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	private static int chiamaDigimonGiocatore1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	private static void popolamentoPartita() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 
 	private static Utente creaUtente(Scanner scanner, Connection connessione) throws SQLException {
 
@@ -115,20 +180,6 @@ public class MainCreazione {
 		return true;
 	}
 	
-	
-	private static void stampaTabellaDigimonUtente(Utente u, Connection connessione)throws SQLException {
-		
-		PreparedStatement prepareStatement = connessione.prepareStatement("select utenti.*,digimon.* from utenti inner join digimon on digimon.idutente = ?;");
-		prepareStatement.setString(1, u.getId());
-		 ResultSet risultato = prepareStatement.executeQuery();
-		while (risultato.next()) {
-			System.out.println(risultato.getString(1) + " " + risultato.getString(2) + " " + 
-		risultato.getInt(3) + " " + risultato.getString(4) + " " + risultato.getInt(5) + " " + 
-					risultato.getInt(6) + " " + risultato.getInt(7) + " " + risultato.getInt(8) + " " + 
-		risultato.getString(9) + " " + risultato.getString(10) + " " + risultato.getString(11));
-			
-		}
-	}
 
 	private static void popolamentoUtente(Utente u, Connection connessione) throws SQLException {
 		String queryInserimentoUtente = "INSERT INTO utenti (id, nome) VALUES (?, ?);";
