@@ -48,7 +48,7 @@ public class MainCreazione {
 
 			case 3: {
 
-				creaPartita(connessione, scanner);
+				creaPartitaPerCreatore(connessione, scanner);
 
 				break;
 			}
@@ -77,7 +77,7 @@ public class MainCreazione {
 
 	}
 	
-	public static String chiamaGiocatori(Connection connessione, Scanner scanner)throws SQLException {
+	public static String chiamaCreatore(Connection connessione, Scanner scanner)throws SQLException {
 		PreparedStatement prepareStatement = connessione.prepareStatement("select distinct idutente from digimon;");
 		ResultSet executeQuery = prepareStatement.executeQuery();
 		List<String>listaUtenti = new ArrayList<>();
@@ -85,7 +85,7 @@ public class MainCreazione {
 			String id = executeQuery.getString(1);
 			listaUtenti.add(id);
 		}
-		System.out.println("indica l'id del giocatore da selezionare");
+		System.out.println("indica l'id del creatore della partita");
 	
 		for (String string : listaUtenti) {
 			System.out.println(string);
@@ -105,69 +105,113 @@ public class MainCreazione {
 	
 	}
 	
+	public static String chiamaSfidante(Connection connessione, Scanner scanner)throws SQLException {
+		PreparedStatement prepareStatement = connessione.prepareStatement("select distinct idutente from digimon;");
+		ResultSet executeQuery = prepareStatement.executeQuery();
+		List<String>listaUtenti = new ArrayList<>();
+		while (executeQuery.next()) {
+			String id = executeQuery.getString(1);
+			listaUtenti.add(id);
+		}
+		System.out.println("indica l'id dello sfidante della partita");
+	
+		for (String string : listaUtenti) {
+			System.out.println(string);
+		}
+		
+		String idSfidantePartita = scanner.nextLine();
+		
+		if (listaUtenti.contains(idSfidantePartita)) {
+			
+			return idSfidantePartita;
+		}
+		
+		else {
+			System.out.println("riprova");
+			return null;
+		}
+	
+	}
 	
 	
-	private static void creaPartita(Connection connessione, Scanner scanner) throws SQLException {
+	
+	private static void creaPartitaPerCreatore(Connection connessione, Scanner scanner) throws SQLException {
 		System.out.println("dammi la password per accedere alla partita");
 		String password = scanner.nextLine();
 		
 		
 		PreparedStatement prepareStatement = connessione.prepareStatement("select utenti.id,digimon.id,digimon.nome from utenti inner join digimon on digimon.idutente = ?;");
-		String giocatore = chiamaGiocatori(connessione, scanner);
-		prepareStatement.setString(1, giocatore);
+		prepareStatement.setString(1, chiamaCreatore(connessione, scanner));
 		ResultSet executeQuery = prepareStatement.executeQuery();
 		Map<Integer, String> mappaDigimon = new HashMap<Integer, String>();
 		while (executeQuery.next()) {
-			Integer idDigimon = executeQuery.getInt(1);
-			String nomeDigimon = executeQuery.getString(2);
+			Integer idDigimon = executeQuery.getInt(2);
+			String nomeDigimon = executeQuery.getString(3);
 			mappaDigimon.put(idDigimon, nomeDigimon);
 		}
 		System.out.println("indica 3 digimon da selezionare");
 		for (Integer key : mappaDigimon.keySet()) {
 			System.out.println(key);
 		}
+		
 		Integer posizione1 = scanner.nextInt();
 		Integer posizione2 = scanner.nextInt();
 		Integer posizione3 = scanner.nextInt();
 		scanner.nextLine();
 
+		
+		
+		Partita g1 = new Partita(password, chiamaCreatore(connessione, scanner), posizione1, posizione2, posizione3);
+		
+		System.out.println(g1);
+		
+		creaPartitaSfidante(connessione, scanner, g1);
+	
+	
+			popolamentoPartita();
+		
+		
+		
+	}
+	
+	private static void creaPartitaSfidante(Connection connessione, Scanner scanner, Partita p) throws SQLException{
+		System.out.println("dammi la password per accedere alla partita");
+		String password = scanner.nextLine();
+		
+		if (p.getPassword().equals(password)) {
+			
+		
+		
+		
 		PreparedStatement prepareStatement2 = connessione.prepareStatement("select utenti.id,digimon.id,digimon.nome from utenti inner join digimon on digimon.idutente = ?;");
-		String giocatore2 = chiamaGiocatori(connessione, scanner);
-		prepareStatement2.setString(1, giocatore2);
+		prepareStatement2.setString(1, chiamaSfidante(connessione, scanner));
 		ResultSet executeQuery2 = prepareStatement2.executeQuery();
 		Map<Integer, String> mappaDigimon2 = new HashMap<Integer, String>();
 		while (executeQuery2.next()) {
-			Integer idDigimon2 = executeQuery2.getInt(1);
-			String nomeDigimon2 = executeQuery2.getString(2);
-			mappaDigimon.put(idDigimon2, nomeDigimon2);
+			Integer idDigimon2 = executeQuery2.getInt(2);
+			String nomeDigimon2 = executeQuery2.getString(3);
+			mappaDigimon2.put(idDigimon2, nomeDigimon2);
 		}
 		System.out.println("indica 3 digimon da selezionare");
 		for (Integer key : mappaDigimon2.keySet()) {
 			System.out.println(key);
 		}
 		Integer posizione4 = scanner.nextInt();
-		scanner.nextLine();
 		Integer posizione5 = scanner.nextInt();
-		scanner.nextLine();
 		Integer posizione6 = scanner.nextInt();
 		scanner.nextLine();
 		
-		Partita p1 = new Partita(password, chiamaGiocatori(connessione, scanner), chiamaGiocatori(connessione, scanner), 
-				posizione1, posizione2, posizione3, posizione4, posizione5, posizione6);
-	System.out.println(p1);
-			popolamentoPartita();
+		Partita g2 = new Partita(password, chiamaSfidante(connessione, scanner), posizione4, posizione5, posizione6);
+		System.out.println(g2);
 		
+		}
+		
+		else {
+			System.out.println("password errata non puoi entrare nella partita");
+		}
 		
 		
 	}
-
-
-
-	private static int chiamaDigimonGiocatore2() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 
 
 /*	private static String chiamaDigimonGiocatore1(Connection connessione, Scanner scanner) throws SQLException, ClassNotFoundException{

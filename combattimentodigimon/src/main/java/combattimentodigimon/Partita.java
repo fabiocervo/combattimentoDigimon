@@ -4,28 +4,19 @@ public class Partita {
 
 	
 	private String password;
-	private String idCreatore;
-	private String idSfidante;
-	private int dc1;
-	private int dc2;
-	private int dc3;
-	private int ds1;
-	private int ds2;
-	private int ds3;
+	private String idGiocatore;
+	private int digi1;
+	private int digi2;
+	private int digi3;
 	
 	
-	public Partita(String password, String idCreatore, String idSfidante, int dc1, int dc2, int dc3, int ds1, int ds2,
-			int ds3) {
+	public Partita(String password, String idGiocatore, int digi1, int digi2, int digi3) {
 		super();
 		this.password = password;
-		this.idCreatore = idCreatore;
-		this.idSfidante = idSfidante;
-		this.dc1 = dc1;
-		this.dc2 = dc2;
-		this.dc3 = dc3;
-		this.ds1 = ds1;
-		this.ds2 = ds2;
-		this.ds3 = ds3;
+		this.idGiocatore = idGiocatore;
+		this.digi1 = digi1;
+		this.digi2 = digi2;
+		this.digi3 = digi3;
 	}
 	
 	
@@ -35,63 +26,42 @@ public class Partita {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getIdCreatore() {
-		return idCreatore;
+	public String getIdGiocatore() {
+		return idGiocatore;
 	}
-	public void setIdCreatore(String idCreatore) {
-		this.idCreatore = idCreatore;
+	public void setIdGiocatore(String idGiocatore) {
+		this.idGiocatore = idGiocatore;
 	}
-	public String getIdSfidante() {
-		return idSfidante;
+	public int getDigi1() {
+		return digi1;
 	}
-	public void setIdSfidante(String idSfidante) {
-		this.idSfidante = idSfidante;
+	public void setDigi1(int digi1) {
+		this.digi1 = digi1;
 	}
-	public int getDc1() {
-		return dc1;
+	public int getDigi2() {
+		return digi2;
 	}
-	public void setDc1(int dc1) {
-		this.dc1 = dc1;
+	public void setDigi2(int digi2) {
+		this.digi2 = digi2;
 	}
-	public int getDc2() {
-		return dc2;
-	}										
-	public void setDc2(int dc2) {
-		this.dc2 = dc2;
+	public int getDigi3() {
+		return digi3;
 	}
-	public int getDc3() {
-		return dc3;
-	}
-	public void setDc3(int dc3) {
-		this.dc3 = dc3;
-	}
-	public int getDs1() {
-		return ds1;
-	}
-	public void setDs1(int ds1) {
-		this.ds1 = ds1;
-	}
-	public int getDs2() {
-		return ds2;
-	}
-	public void setDs2(int ds2) {
-		this.ds2 = ds2;
-	}
-	public int getDs3() {
-		return ds3;
-	}
-	public void setDs3(int ds3) {
-		this.ds3 = ds3;
-	}
-	@Override
-	public String toString() {
-		return "Partita [password=" + password + ", idCreatore=" + idCreatore + ", idSfidante=" + idSfidante + ", dc1="
-				+ dc1 + ", dc2=" + dc2 + ", dc3=" + dc3 + ", ds1=" + ds1 + ", ds2=" + ds2 + ", ds3=" + ds3 + "]";
+	public void setDigi3(int digi3) {
+		this.digi3 = digi3;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Partita [password=" + password + ", idGiocatore=" + idGiocatore + ", digi1=" + digi1 + ", digi2="
+				+ digi2 + ", digi3=" + digi3 + "]";
+	}
 	
 	
 	
+	
+
 	
 	
 	
