@@ -23,14 +23,6 @@ public class Gestione {
 	this.connessione = DriverManager.getConnection(url, username, password);
 	}
 	
-	public void chiamaCreatore()throws SQLException, ClassNotFoundException{
-		PreparedStatement prepareStatement = connessione.prepareStatement("select distinct idutente from digimon;");
-		ResultSet executeQuery = prepareStatement.executeQuery();
-		List<String> listaUtenti = new ArrayList<>();
-		while (executeQuery.next()) {
-			String id = executeQuery.getString(1);
-			listaUtenti.add(id);
-		}
 	}
 	
 	
@@ -40,4 +32,4 @@ public class Gestione {
 	
 	
 	
-}
+
