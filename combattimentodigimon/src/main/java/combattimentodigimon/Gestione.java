@@ -40,7 +40,7 @@ public class Gestione {
 		return idCreatorePartita;
 	}
 
-	public String chiamaSfidante(Scanner scanner) throws SQLException {
+	public String chiamaSfidante(Scanner scanner) throws SQLException { 
 		PreparedStatement prepareStatement = getConnessione()
 				.prepareStatement("select distinct idutente from digimon;");
 		ResultSet executeQuery = prepareStatement.executeQuery();
