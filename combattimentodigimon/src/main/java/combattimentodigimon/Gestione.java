@@ -37,7 +37,7 @@ public class Gestione {
 		}
 		System.out.println("indica l'id del creatore della partita");
 		String idCreatorePartita = scanner.nextLine();
-		return idCreatorePartita;
+		return idCreatorePartita; 
 	}
 
 	public String chiamaSfidante(Scanner scanner) throws SQLException { 
