@@ -223,8 +223,8 @@ public class Gestione {
 		prepareStatement.setString(8, digimon.getProprietario());
 		prepareStatement.execute();
 	}
-	
-	
+	  
+	 
 
 	public void chiamaPartita(Scanner scanner, GestioneTurniDigimon g, int idpartita) throws SQLException, ClassNotFoundException {
 		PreparedStatement statement = getConnessione().prepareStatement("SELECT idcreatore,idsfidante FROM ExmDFToJYb.partite where idpartita = ?;");
