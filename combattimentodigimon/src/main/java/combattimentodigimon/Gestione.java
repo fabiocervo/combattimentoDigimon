@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class Gestione {
+public class Gestione { 
 	private Connection connessione;
 
 	public Connection getConnessione() {
