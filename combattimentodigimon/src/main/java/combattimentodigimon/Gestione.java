@@ -232,7 +232,7 @@ public class Gestione {
 		ResultSet risultato = statement.executeQuery();
 		while (risultato.next()) {
 			String idcreatore = risultato.getString(2);
-			String idsfidante = risultato.getString(7);
+			String idsfidante = risultato.getString(7); 
 			
 			System.out.println(idcreatore + " " + idsfidante);
 			

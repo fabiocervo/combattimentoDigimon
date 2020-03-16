@@ -37,7 +37,7 @@ public class MainCreazione {
 			case 3: {
 				gest.creaPartitaPerCreatore(scanner);
 				break;
-			}
+			} 
 
 			case 4: {
 			    gest.creaPartitaSfidante(scanner);
