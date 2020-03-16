@@ -32,16 +32,31 @@ public class MainCreazione {
 			case 3: {
 				gest.creaPartitaPerCreatore(scanner);
 				break;
-			} 
+			}
 
 			case 4: {
-			    gest.creaPartitaSfidante(scanner);
+				gest.creaPartitaSfidante(scanner);
 				break;
 			}
-			
-			case 5:{
-				
-				//gest.chiamaPartita(scanner, gT, idpartita);
+
+			case 5: {
+				System.out.println("qual è il tuo idUtente");
+				String idUtente = scanner.nextLine();
+				gest.stampaIdPartita(idUtente);
+				System.out.println("scegli id partita");
+				int idPartita = scanner.nextInt();
+				scanner.nextLine();
+				gest.chiamaPartita(gT, idPartita);
+				break;
+			}
+			case 6: {
+				System.out.println("qual è il tuo idUtente");
+				String idUtente = scanner.nextLine();
+				gest.stampaIdPartitaSfidante(idUtente);
+				System.out.println("scegli id partita");
+				int idPartita = scanner.nextInt();
+				scanner.nextLine();
+				gest.chiamaPartitaSfidante(gT, idPartita);
 				break;
 			}
 
@@ -64,7 +79,4 @@ public class MainCreazione {
 
 	}
 
-	
-	}
-
-
+}

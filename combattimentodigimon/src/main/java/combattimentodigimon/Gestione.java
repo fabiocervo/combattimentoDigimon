@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public class Gestione { 
+public class Gestione {
 	private Connection connessione;
 
 	public Connection getConnessione() {
@@ -37,10 +37,10 @@ public class Gestione {
 		}
 		System.out.println("indica l'id del creatore della partita");
 		String idCreatorePartita = scanner.nextLine();
-		return idCreatorePartita; 
+		return idCreatorePartita;
 	}
 
-	public String chiamaSfidante(Scanner scanner) throws SQLException { 
+	public String chiamaSfidante(Scanner scanner) throws SQLException {
 		PreparedStatement prepareStatement = getConnessione()
 				.prepareStatement("select distinct idutente from digimon;");
 		ResultSet executeQuery = prepareStatement.executeQuery();
@@ -57,12 +57,12 @@ public class Gestione {
 		System.out.println("dammi la password per accedere alla partita");
 		String password = scanner.nextLine();
 		PreparedStatement prepareStatement = getConnessione().prepareStatement(
-				"select utenti.id,digimon.id,digimon.nome from utenti inner join digimon on digimon.idutente = ?;");
+				"select id, nome from digimon where idutente = ?;");
 		prepareStatement.setString(1, chiamaCreatore(scanner));
 		ResultSet executeQuery = prepareStatement.executeQuery();
 		while (executeQuery.next()) {
-			Integer idDigimon = executeQuery.getInt(2);
-			String nomeDigimon = executeQuery.getString(3);
+			Integer idDigimon = executeQuery.getInt(1);
+			String nomeDigimon = executeQuery.getString(2);
 			System.out.println(idDigimon + " " + nomeDigimon);
 		}
 		System.out.println("indica 3 digimon da selezionare");
@@ -79,12 +79,12 @@ public class Gestione {
 		System.out.println("dammi la password per accedere alla partita");
 		String password = scanner.nextLine();
 		PreparedStatement prepareStatement2 = getConnessione().prepareStatement(
-				"select utenti.id,digimon.id,digimon.nome from utenti inner join digimon on digimon.idutente = ?;");
+				"select id, nome from digimon where idutente = ?;");
 		prepareStatement2.setString(1, chiamaSfidante(scanner));
 		ResultSet executeQuery2 = prepareStatement2.executeQuery();
 		while (executeQuery2.next()) {
-			Integer idDigimon2 = executeQuery2.getInt(2);
-			String nomeDigimon2 = executeQuery2.getString(3);
+			Integer idDigimon2 = executeQuery2.getInt(1);
+			String nomeDigimon2 = executeQuery2.getString(2);
 			System.out.println(idDigimon2 + " " + nomeDigimon2);
 		}
 		System.out.println("indica 3 digimon da selezionare");
@@ -210,7 +210,6 @@ public class Gestione {
 		return posizione;
 	}
 
-	
 	public void popolamentoDigimon(Digimon digimon) throws SQLException {
 		String queryInserimentoDigimon = "INSERT INTO digimon (nome, hp, atk, def, res, evo, tipo, idutente) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		PreparedStatement prepareStatement = getConnessione().prepareStatement(queryInserimentoDigimon);
@@ -224,54 +223,44 @@ public class Gestione {
 		prepareStatement.setString(8, digimon.getProprietario());
 		prepareStatement.execute();
 	}
-	   
-	 
 
-	public void chiamaPartita(Scanner scanner, GestioneTurniDigimon g, int idpartita) throws SQLException, ClassNotFoundException {
-		PreparedStatement statement = getConnessione().prepareStatement("SELECT idcreatore,idsfidante FROM ExmDFToJYb.partite where idpartita = ?;");
+	public void chiamaPartita(GestioneTurniDigimon g, int idpartita)
+			throws SQLException, ClassNotFoundException {
+		PreparedStatement statement = getConnessione()
+				.prepareStatement("SELECT idcreatore,idsfidante FROM ExmDFToJYb.partite where idpartita = ?;");
 		statement.setInt(1, idpartita);
 		ResultSet risultato = statement.executeQuery();
 		while (risultato.next()) {
-			String idcreatore = risultato.getString(2);
-			String idsfidante = risultato.getString(7); 
-			
+			String idcreatore = risultato.getString(1);
+			String idsfidante = risultato.getString(2);
 			System.out.println(idcreatore + " " + idsfidante);
-			
-
 			riempimentoListaCreatore(idpartita, g, idcreatore);
-			riempimentoListaSfidante(idpartita, g, idsfidante);
+
 		}
-		
-		
-		
-		
-		/*PreparedStatement statement1 = getConnessione().prepareStatement("SELECT dc1, dc2, dc3 FROM partite where idpartita= ?;");
-		statement1.setInt(1, id);
-		ResultSet risultato1 = statement1.executeQuery();
-		while (risultato1.next()) {
-			int digi1 = risultato1.getInt(1);
-			int digi2 = risultato1.getInt(1);
-			int digi3 = risultato1.getInt(1);
-			System.out.println(digi1 + " "+ digi2 + " " + digi3);
-		
-			riempimentoListaCreatore(id, g, digi1, digi2, digi3);
-				//riempimentoListaSfidante(id, g, digi1, digi2, digi3);
-		}*/
-	
-		
-		
-		
-	
-		
-		
-		
 	}
-	
-	public void riempimentoListaCreatore(int id, GestioneTurniDigimon g, String idcreatore) throws SQLException, ClassNotFoundException{
-		
+
+	public void chiamaPartitaSfidante(GestioneTurniDigimon g, int idpartita)
+			throws SQLException, ClassNotFoundException {
+		PreparedStatement statement = getConnessione()
+				.prepareStatement("SELECT idcreatore,idsfidante FROM ExmDFToJYb.partite where idpartita = ?;");
+		statement.setInt(1, idpartita);
+		ResultSet risultato = statement.executeQuery();
+		while (risultato.next()) {
+			String idcreatore = risultato.getString(1);
+			String idsfidante = risultato.getString(2);
+			System.out.println(idcreatore + " " + idsfidante);
+			riempimentoListaSfidante(idpartita, g, idsfidante);
+
+		}
+
+	}
+
+	public void riempimentoListaCreatore(int id, GestioneTurniDigimon g, String idcreatore)
+			throws SQLException, ClassNotFoundException {
+
 		PreparedStatement prepareStatement = getConnessione().prepareStatement(
 				"SELECT digimon.*  from partite inner join digimon on digimon.idutente = ? and partite.idpartita = ?;");
-		
+
 		prepareStatement.setString(1, idcreatore);
 		prepareStatement.setInt(2, id);
 		ResultSet risultato2 = prepareStatement.executeQuery();
@@ -287,34 +276,60 @@ public class Gestione {
 
 			Digimon d = new Digimon(nome, attacco, difesa, res, hp, evo, tipo, idCreatore);
 			g.getListaDigimonCreatore().add(d);
-			
-	
+
 			System.out.println(g.getListaDigimonCreatore());
 		}
 
 	}
-	
-	public void riempimentoListaSfidante(int id, GestioneTurniDigimon g, String idsfidante) throws SQLException, ClassNotFoundException{
-		
+
+	public void riempimentoListaSfidante(int id, GestioneTurniDigimon g, String idsfidante)
+			throws SQLException, ClassNotFoundException {
+
 		PreparedStatement prepareStatement = getConnessione().prepareStatement(
-				"SELECT digimon.*  from partite inner join digimon on digimon.id = ? and partite.idpartita = ?;");
+				"SELECT digimon.*  from partite inner join digimon on digimon.idutente = ? and partite.idpartita = ?;");
 		prepareStatement.setString(1, idsfidante);
 		prepareStatement.setInt(2, id);
 		ResultSet risultato2 = prepareStatement.executeQuery();
 		while (risultato2.next()) {
-			String idSfidante = risultato2.getString(9);
 			String nome = risultato2.getString(2);
+			int hp = risultato2.getInt(3);			
 			int attacco = risultato2.getInt(4);
 			int difesa = risultato2.getInt(5);
-			int res = risultato2.getInt(6);
-			int hp = risultato2.getInt(3);
+			int res = risultato2.getInt(6);			
 			String evo = risultato2.getString(7);
 			String tipo = risultato2.getString(8);
-
+            String idSfidante = risultato2.getString(9);
+            
 			Digimon d = new Digimon(nome, attacco, difesa, res, hp, evo, tipo, idSfidante);
 			g.getListaDigimonSfidante().add(d);
+			
 			System.out.println(g.getListaDigimonSfidante());
 		}
 
 	}
+
+	public void stampaIdPartita(String idCreatore) throws SQLException {
+		PreparedStatement statement = getConnessione().prepareStatement(
+				"select utenti.nome,partite.idpartita from utenti inner join partite on utenti.id = partite.idcreatore where idcreatore =? or idsfidante=?;");
+		statement.setString(1, idCreatore);
+		statement.setString(2, idCreatore);
+		ResultSet risultato = statement.executeQuery();
+		while (risultato.next()) {
+			System.out.println(risultato.getString(1) + " " + risultato.getInt(2));
+		}
+
+	}
+	public void stampaIdPartitaSfidante(String idSfidante) throws SQLException {
+		PreparedStatement statement = getConnessione().prepareStatement(
+				"select utenti.nome,partite.idpartita from utenti inner join partite on utenti.id = partite.idsfidante where idcreatore =? or idsfidante=?;");
+		statement.setString(1, idSfidante);
+		statement.setString(2, idSfidante);
+		ResultSet risultato = statement.executeQuery();
+		while (risultato.next()) {
+			System.out.println(risultato.getString(1) + " " + risultato.getInt(2));
+		}
+
+	}
+
+	
 }
