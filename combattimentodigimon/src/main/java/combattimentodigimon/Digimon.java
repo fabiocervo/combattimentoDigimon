@@ -128,6 +128,7 @@ public class Digimon {
 		return "Digimon [nome=" + nome + ", atk=" + atk + ", def=" + def + ", res=" + res + ", hp=" + hp + ", evo="
 				+ evo + ", tipo=" + tipo + ", proprietario=" + proprietario + "]";
 	}
+
 	
 
 }

@@ -1,6 +1,6 @@
 package combattimentodigimon;
 
-public class GestioneCombattimentoDigimon { 
+public class GestioneCaratteristicheDigimon {
 	public  int calcoloAttacco() {
 		int attacco = (int) ((int) 100 + (Math.random() * 51));
 		return attacco;
@@ -21,6 +21,5 @@ public class GestioneCombattimentoDigimon {
 		int res = (int) ((int) 5 + (Math.random() * 6));
 		return res;
 	}
-	
 	
 }
