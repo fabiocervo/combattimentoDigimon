@@ -29,345 +29,348 @@ public class GestioneTurniDigimon {
 		this.listaDigimonSfidante = listaDigimonSfidante;
 	}
 
-	public void turnoCreatore() {
+	public void turnoCreatore(int i) {
 
 		// acqua DANNI NORMALI terra acqua DANNI SFAVOREVOLI aria DANNI FAVOREVOLI fuoco
 
-		for (int i = 0; i < 3; i++) {
+		System.out.println(this.getListaDigimonCreatore().get(i) + "VS" + this.getListaDigimonSfidante().get(i));
 
-			System.out.println(this.getListaDigimonCreatore().get(i) + "VS" + this.getListaDigimonSfidante().get(i));
+		if (this.getListaDigimonCreatore().get(i).getTipo() == "acqua") {
+			if (this.getListaDigimonSfidante().get(i).getTipo() == "acqua"
+					|| this.getListaDigimonSfidante().get(i).getTipo() == "terra") {
+				int danni = this.getListaDigimonCreatore().get(i).getAtk();
 
-			if (this.getListaDigimonCreatore().get(i).getTipo() == "acqua") {
-				if (this.getListaDigimonSfidante().get(i).getTipo() == "acqua"
-						|| this.getListaDigimonSfidante().get(i).getTipo() == "terra") {
-					int danni = this.getListaDigimonCreatore().get(i).getAtk();
+				int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
+						- ((danni - this.getListaDigimonSfidante().get(i).getDef())
+								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
-					int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
-							- ((danni - this.getListaDigimonSfidante().get(i).getDef())
-									* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
-
-					this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonSfidante().get(i).getTipo() == "aria") {
-					int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() / 2;
-
-					int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
-							- ((danni - this.getListaDigimonSfidante().get(i).getDef())
-									* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
-
-					this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonSfidante().get(i).getTipo() == "fuoco") {
-					int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() * 2;
-
-					int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
-							- ((danni - this.getListaDigimonSfidante().get(i).getDef())
-									* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
-
-					this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
-				}
+				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
 
 			}
 
-			// fuoco DANNI NORMALI aria fuoco DANNI SFAVOREVOLI acqua DANNI FAVOREVOLI terra
-			else if (this.getListaDigimonCreatore().get(i).getTipo() == "fuoco") {
-				if (this.getListaDigimonSfidante().get(i).getTipo() == "aria"
-						|| this.getListaDigimonSfidante().get(i).getTipo() == "fuoco") {
-					int danni = this.getListaDigimonCreatore().get(i).getAtk();
+			if (this.getListaDigimonSfidante().get(i).getTipo() == "aria") {
+				int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() / 2;
 
-					int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
-							- ((danni - this.getListaDigimonSfidante().get(i).getDef())
-									* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
+				int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
+						- ((danni - this.getListaDigimonSfidante().get(i).getDef())
+								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
-					this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonSfidante().get(i).getTipo() == "acqua") {
-					int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() / 2;
-
-					int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
-							- ((danni - this.getListaDigimonSfidante().get(i).getDef())
-									* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
-
-					this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonSfidante().get(i).getTipo() == "terra") {
-					int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() * 2;
-
-					int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
-							- ((danni - this.getListaDigimonSfidante().get(i).getDef())
-									* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
-
-					this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
-				}
+				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
 
 			}
 
-			// aria DANNI NORMALI fuoco aria DANNI SFAVOREVOLI terra DANNI FAVOREVOLI acqua
+			if (this.getListaDigimonSfidante().get(i).getTipo() == "fuoco") {
+				int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() * 2;
 
-			else if (this.getListaDigimonCreatore().get(i).getTipo() == "aria") {
-				if (this.getListaDigimonSfidante().get(i).getTipo() == "fuoco"
-						|| this.getListaDigimonSfidante().get(i).getTipo() == "aria") {
-					int danni = this.getListaDigimonCreatore().get(i).getAtk();
+				int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
+						- ((danni - this.getListaDigimonSfidante().get(i).getDef())
+								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
-					int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
-							- ((danni - this.getListaDigimonSfidante().get(i).getDef())
-									* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
+				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
 
-					this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonSfidante().get(i).getTipo() == "terra") {
-					int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() / 2;
-
-					int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
-							- ((danni - this.getListaDigimonSfidante().get(i).getDef())
-									* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
-
-					this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonSfidante().get(i).getTipo() == "acqua") {
-					int danni = (int) this.getListaDigimonCreatore().get(0).getAtk() * 2;
-
-					int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
-							- ((danni - this.getListaDigimonSfidante().get(i).getDef())
-									* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
-
-					this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
-				}
-
-			}
-
-			// terra DANNI NORMALI acqua terra DANNI SFAVOREVOLI fuoco DANNI FAVOREVOLI aria
-
-			else if (this.getListaDigimonCreatore().get(i).getTipo() == "terra") {
-				if (this.getListaDigimonSfidante().get(i).getTipo() == "acqua"
-						|| this.getListaDigimonSfidante().get(i).getTipo() == "terra") {
-					int danni = this.getListaDigimonCreatore().get(i).getAtk();
-
-					int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
-							- ((danni - this.getListaDigimonSfidante().get(i).getDef())
-									* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
-
-					this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonSfidante().get(i).getTipo() == "fuoco") {
-					int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() / 2;
-
-					int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
-							- ((danni - this.getListaDigimonSfidante().get(i).getDef())
-									* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
-
-					this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonSfidante().get(i).getTipo() == "aria") {
-					int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() * 2;
-
-					int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
-							- ((danni - this.getListaDigimonSfidante().get(i).getDef())
-									* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
-
-					this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
-				}
-
-			}
-
-			if (this.getListaDigimonSfidante().get(i).getHp() == 0) {
-				System.out.println(this.getListaDigimonCreatore().get(i) + " ha vinto contro "
-						+ this.getListaDigimonSfidante().get(i));
 			}
 
 		}
-	}
-	
-	public void turnoSfidante() {
 
-		// acqua DANNI NORMALI terra acqua DANNI SFAVOREVOLI aria DANNI FAVOREVOLI fuoco
+		// fuoco DANNI NORMALI aria fuoco DANNI SFAVOREVOLI acqua DANNI FAVOREVOLI terra
+		else if (this.getListaDigimonCreatore().get(i).getTipo() == "fuoco") {
+			if (this.getListaDigimonSfidante().get(i).getTipo() == "aria"
+					|| this.getListaDigimonSfidante().get(i).getTipo() == "fuoco") {
+				int danni = this.getListaDigimonCreatore().get(i).getAtk();
 
-		for (int i = 0; i < 3; i++) {
+				int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
+						- ((danni - this.getListaDigimonSfidante().get(i).getDef())
+								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
-			System.out.println(this.getListaDigimonSfidante().get(i) + "VS" + this.getListaDigimonCreatore().get(i));
+				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
+
+			}
 
 			if (this.getListaDigimonSfidante().get(i).getTipo() == "acqua") {
-				
-				if (this.getListaDigimonCreatore().get(i).getTipo() == "acqua"
-						|| this.getListaDigimonCreatore().get(i).getTipo() == "terra") {
-					int danni = this.getListaDigimonSfidante().get(i).getAtk();
+				int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() / 2;
 
-					int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
-							- ((danni - this.getListaDigimonCreatore().get(i).getDef())
-									* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+				int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
+						- ((danni - this.getListaDigimonSfidante().get(i).getDef())
+								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
-					this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonCreatore().get(i).getTipo() == "aria") {
-					int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() / 2;
-
-					int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
-							- ((danni - this.getListaDigimonCreatore().get(i).getDef())
-									* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
-
-					this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonCreatore().get(i).getTipo() == "fuoco") {
-					int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() * 2;
-
-					int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
-							- ((danni - this.getListaDigimonCreatore().get(i).getDef())
-									* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
-
-					this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
-				}
+				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
 
 			}
 
-			// fuoco DANNI NORMALI aria fuoco DANNI SFAVOREVOLI acqua DANNI FAVOREVOLI terra
-			else if (this.getListaDigimonSfidante().get(i).getTipo() == "fuoco") {
-				
-				if (this.getListaDigimonCreatore().get(i).getTipo() == "aria"
-						|| this.getListaDigimonCreatore().get(i).getTipo() == "fuoco") {
-					int danni = this.getListaDigimonSfidante().get(i).getAtk();
+			if (this.getListaDigimonSfidante().get(i).getTipo() == "terra") {
+				int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() * 2;
 
-					int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
-							- ((danni - this.getListaDigimonCreatore().get(i).getDef())
-									* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+				int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
+						- ((danni - this.getListaDigimonSfidante().get(i).getDef())
+								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
-					this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
 
-				}
-
-				if (this.getListaDigimonCreatore().get(i).getTipo() == "acqua") {
-					int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() / 2;
-
-					int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
-							- ((danni - this.getListaDigimonCreatore().get(i).getDef())
-									* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
-
-					this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonCreatore().get(i).getTipo() == "terra") {
-					int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() * 2;
-
-					int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
-							- ((danni - this.getListaDigimonCreatore().get(i).getDef())
-									* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
-
-					this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
-				}
-
-			}
-
-			// aria DANNI NORMALI fuoco aria DANNI SFAVOREVOLI terra DANNI FAVOREVOLI acqua
-
-			else if (this.getListaDigimonSfidante().get(i).getTipo() == "aria") {
-				
-				if (this.getListaDigimonCreatore().get(i).getTipo() == "fuoco"
-						|| this.getListaDigimonCreatore().get(i).getTipo() == "aria") {
-					int danni = this.getListaDigimonSfidante().get(i).getAtk();
-
-					int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
-							- ((danni - this.getListaDigimonCreatore().get(i).getDef())
-									* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
-
-					this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonCreatore().get(i).getTipo() == "terra") {
-					int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() / 2;
-
-					int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
-							- ((danni - this.getListaDigimonCreatore().get(i).getDef())
-									* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
-
-					this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonCreatore().get(i).getTipo() == "acqua") {
-					int danni = (int) this.getListaDigimonSfidante().get(0).getAtk() * 2;
-
-					int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
-							- ((danni - this.getListaDigimonCreatore().get(i).getDef())
-									* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
-
-					this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
-				}
-
-			}
-
-			// terra DANNI NORMALI acqua terra DANNI SFAVOREVOLI fuoco DANNI FAVOREVOLI aria
-
-			else if (this.getListaDigimonSfidante().get(i).getTipo() == "terra") {
-				
-				if (this.getListaDigimonCreatore().get(i).getTipo() == "acqua"
-						|| this.getListaDigimonCreatore().get(i).getTipo() == "terra") {
-					int danni = this.getListaDigimonSfidante().get(i).getAtk();
-
-					int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
-							- ((danni - this.getListaDigimonCreatore().get(i).getDef())
-									* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
-
-					this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonCreatore().get(i).getTipo() == "fuoco") {
-					int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() / 2;
-
-					int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
-							- ((danni - this.getListaDigimonCreatore().get(i).getDef())
-									* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
-
-					this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
-				}
-
-				if (this.getListaDigimonCreatore().get(i).getTipo() == "aria") {
-					int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() * 2;
-
-					int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
-							- ((danni - this.getListaDigimonCreatore().get(i).getDef())
-									* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
-
-					this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
-				}
-
-			}
-
-			if (this.getListaDigimonCreatore().get(i).getHp() == 0) {
-				System.out.println(this.getListaDigimonSfidante().get(i) + " ha vinto contro "
-						+ this.getListaDigimonCreatore().get(i));
 			}
 
 		}
+
+		// aria DANNI NORMALI fuoco aria DANNI SFAVOREVOLI terra DANNI FAVOREVOLI acqua
+
+		else if (this.getListaDigimonCreatore().get(i).getTipo() == "aria") {
+			if (this.getListaDigimonSfidante().get(i).getTipo() == "fuoco"
+					|| this.getListaDigimonSfidante().get(i).getTipo() == "aria") {
+				int danni = this.getListaDigimonCreatore().get(i).getAtk();
+
+				int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
+						- ((danni - this.getListaDigimonSfidante().get(i).getDef())
+								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
+
+				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
+
+			}
+
+			if (this.getListaDigimonSfidante().get(i).getTipo() == "terra") {
+				int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() / 2;
+
+				int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
+						- ((danni - this.getListaDigimonSfidante().get(i).getDef())
+								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
+
+				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
+
+			}
+
+			if (this.getListaDigimonSfidante().get(i).getTipo() == "acqua") {
+				int danni = (int) this.getListaDigimonCreatore().get(0).getAtk() * 2;
+
+				int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
+						- ((danni - this.getListaDigimonSfidante().get(i).getDef())
+								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
+
+				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
+
+			}
+
+		}
+
+		// terra DANNI NORMALI acqua terra DANNI SFAVOREVOLI fuoco DANNI FAVOREVOLI aria
+
+		else if (this.getListaDigimonCreatore().get(i).getTipo() == "terra") {
+			if (this.getListaDigimonSfidante().get(i).getTipo() == "acqua"
+					|| this.getListaDigimonSfidante().get(i).getTipo() == "terra") {
+				int danni = this.getListaDigimonCreatore().get(i).getAtk();
+
+				int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
+						- ((danni - this.getListaDigimonSfidante().get(i).getDef())
+								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
+
+				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
+
+			}
+
+			if (this.getListaDigimonSfidante().get(i).getTipo() == "fuoco") {
+				int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() / 2;
+
+				int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
+						- ((danni - this.getListaDigimonSfidante().get(i).getDef())
+								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
+
+				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
+
+			}
+
+			if (this.getListaDigimonSfidante().get(i).getTipo() == "aria") {
+				int danni = (int) this.getListaDigimonCreatore().get(i).getAtk() * 2;
+
+				int hpnuovi = this.getListaDigimonSfidante().get(i).getHp()
+						- ((danni - this.getListaDigimonSfidante().get(i).getDef())
+								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
+
+				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
+
+			}
+
+		}
+
+		if (this.getListaDigimonSfidante().get(i).getHp() == 0) {
+			System.out.println(this.getListaDigimonCreatore().get(i) + " ha vinto contro "
+					+ this.getListaDigimonSfidante().get(i));
+		} 
+		
+		else if (this.getListaDigimonCreatore().get(i).getHp() == 0) {
+			System.out.println(this.getListaDigimonSfidante().get(i) + " ha vinto contro "
+					+ this.getListaDigimonCreatore().get(i));
+		}
+	}
+
+	public void turnoSfidante(int i) {
+
+		// acqua DANNI NORMALI terra acqua DANNI SFAVOREVOLI aria DANNI FAVOREVOLI fuoco
+
+		System.out.println(this.getListaDigimonSfidante().get(i) + "VS" + this.getListaDigimonCreatore().get(i));
+
+		if (this.getListaDigimonSfidante().get(i).getTipo() == "acqua") {
+
+			if (this.getListaDigimonCreatore().get(i).getTipo() == "acqua"
+					|| this.getListaDigimonCreatore().get(i).getTipo() == "terra") {
+				int danni = this.getListaDigimonSfidante().get(i).getAtk();
+
+				int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
+						- ((danni - this.getListaDigimonCreatore().get(i).getDef())
+								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+
+				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+
+			}
+
+			if (this.getListaDigimonCreatore().get(i).getTipo() == "aria") {
+				int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() / 2;
+
+				int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
+						- ((danni - this.getListaDigimonCreatore().get(i).getDef())
+								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+
+				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+
+			}
+
+			if (this.getListaDigimonCreatore().get(i).getTipo() == "fuoco") {
+				int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() * 2;
+
+				int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
+						- ((danni - this.getListaDigimonCreatore().get(i).getDef())
+								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+
+				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+
+			}
+
+		}
+
+		// fuoco DANNI NORMALI aria fuoco DANNI SFAVOREVOLI acqua DANNI FAVOREVOLI terra
+		else if (this.getListaDigimonSfidante().get(i).getTipo() == "fuoco") {
+
+			if (this.getListaDigimonCreatore().get(i).getTipo() == "aria"
+					|| this.getListaDigimonCreatore().get(i).getTipo() == "fuoco") {
+				int danni = this.getListaDigimonSfidante().get(i).getAtk();
+
+				int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
+						- ((danni - this.getListaDigimonCreatore().get(i).getDef())
+								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+
+				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+
+			}
+
+			if (this.getListaDigimonCreatore().get(i).getTipo() == "acqua") {
+				int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() / 2;
+
+				int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
+						- ((danni - this.getListaDigimonCreatore().get(i).getDef())
+								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+
+				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+
+			}
+
+			if (this.getListaDigimonCreatore().get(i).getTipo() == "terra") {
+				int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() * 2;
+
+				int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
+						- ((danni - this.getListaDigimonCreatore().get(i).getDef())
+								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+
+				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+
+			}
+
+		}
+
+		// aria DANNI NORMALI fuoco aria DANNI SFAVOREVOLI terra DANNI FAVOREVOLI acqua
+
+		else if (this.getListaDigimonSfidante().get(i).getTipo() == "aria") {
+
+			if (this.getListaDigimonCreatore().get(i).getTipo() == "fuoco"
+					|| this.getListaDigimonCreatore().get(i).getTipo() == "aria") {
+				int danni = this.getListaDigimonSfidante().get(i).getAtk();
+
+				int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
+						- ((danni - this.getListaDigimonCreatore().get(i).getDef())
+								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+
+				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+
+			}
+
+			if (this.getListaDigimonCreatore().get(i).getTipo() == "terra") {
+				int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() / 2;
+
+				int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
+						- ((danni - this.getListaDigimonCreatore().get(i).getDef())
+								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+
+				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+
+			}
+
+			if (this.getListaDigimonCreatore().get(i).getTipo() == "acqua") {
+				int danni = (int) this.getListaDigimonSfidante().get(0).getAtk() * 2;
+
+				int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
+						- ((danni - this.getListaDigimonCreatore().get(i).getDef())
+								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+
+				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+
+			}
+
+		}
+
+		// terra DANNI NORMALI acqua terra DANNI SFAVOREVOLI fuoco DANNI FAVOREVOLI aria
+
+		else if (this.getListaDigimonSfidante().get(i).getTipo() == "terra") {
+
+			if (this.getListaDigimonCreatore().get(i).getTipo() == "acqua"
+					|| this.getListaDigimonCreatore().get(i).getTipo() == "terra") {
+				int danni = this.getListaDigimonSfidante().get(i).getAtk();
+
+				int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
+						- ((danni - this.getListaDigimonCreatore().get(i).getDef())
+								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+
+				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+
+			}
+
+			if (this.getListaDigimonCreatore().get(i).getTipo() == "fuoco") {
+				int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() / 2;
+
+				int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
+						- ((danni - this.getListaDigimonCreatore().get(i).getDef())
+								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+
+				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+
+			}
+
+			if (this.getListaDigimonCreatore().get(i).getTipo() == "aria") {
+				int danni = (int) this.getListaDigimonSfidante().get(i).getAtk() * 2;
+
+				int hpnuovi = this.getListaDigimonCreatore().get(i).getHp()
+						- ((danni - this.getListaDigimonCreatore().get(i).getDef())
+								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
+
+				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
+
+			}
+
+		}
+
+		if (this.getListaDigimonCreatore().get(i).getHp() == 0) {
+			System.out.println(this.getListaDigimonSfidante().get(i) + " ha vinto contro "
+					+ this.getListaDigimonCreatore().get(i));
+		} 
+		
+		else if (this.getListaDigimonSfidante().get(i).getHp() == 0) {
+			System.out.println(this.getListaDigimonCreatore().get(i) + " ha vinto contro "
+					+ this.getListaDigimonSfidante().get(i));
+		}
+
 	}
 }
