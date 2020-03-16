@@ -223,34 +223,96 @@ public class Gestione {
 		prepareStatement.setString(8, digimon.getProprietario());
 		prepareStatement.execute();
 	}
+	
+	
 
-	public void chiamaPartita(Scanner scanner, GestioneTurniDigimon g) throws SQLException, ClassNotFoundException {
-		Statement statement = getConnessione().createStatement();
-		ResultSet risultato = statement.executeQuery("SELECT idpartita and password FROM ExmDFToJYb.partite;");
+	public void chiamaPartita(Scanner scanner, GestioneTurniDigimon g, int idpartita) throws SQLException, ClassNotFoundException {
+		PreparedStatement statement = getConnessione().prepareStatement("SELECT idcreatore,idsfidante FROM ExmDFToJYb.partite where idpartita = ?;");
+		statement.setInt(1, idpartita);
+		ResultSet risultato = statement.executeQuery();
 		while (risultato.next()) {
-			int id = risultato.getInt(1);
-			String password = risultato.getString(2);
-			System.out.println(id + ". " + password);
+			String idcreatore = risultato.getString(2);
+			String idsfidante = risultato.getString(7);
+			
+			System.out.println(idcreatore + " " + idsfidante);
+			
+
+			riempimentoListaCreatore(idpartita, g, idcreatore);
+			riempimentoListaSfidante(idpartita, g, idsfidante);
 		}
-		System.out.println("qual è l 'id ?");
-		int id = scanner.nextInt();
-		scanner.nextLine();
+		
+		
+		
+		
+		/*PreparedStatement statement1 = getConnessione().prepareStatement("SELECT dc1, dc2, dc3 FROM partite where idpartita= ?;");
+		statement1.setInt(1, id);
+		ResultSet risultato1 = statement1.executeQuery();
+		while (risultato1.next()) {
+			int digi1 = risultato1.getInt(1);
+			int digi2 = risultato1.getInt(1);
+			int digi3 = risultato1.getInt(1);
+			System.out.println(digi1 + " "+ digi2 + " " + digi3);
+		
+			riempimentoListaCreatore(id, g, digi1, digi2, digi3);
+				//riempimentoListaSfidante(id, g, digi1, digi2, digi3);
+		}*/
+	
+		
+		
+		
+	
+		
+		
+		
+	}
+	
+	public void riempimentoListaCreatore(int id, GestioneTurniDigimon g, String idcreatore) throws SQLException, ClassNotFoundException{
+		
 		PreparedStatement prepareStatement = getConnessione().prepareStatement(
-				"select partite.idcreatore, partite.dc1,digimon.nome,digimon.atk,digimon.def,digimon.res,digimon.hp, digimon.evo, digimon.tipo, from partite inner join digimon on digimon.id = partite.dc1 and partite.idpartita = ?;");
-		prepareStatement.setInt(1, id);
+				"SELECT digimon.*  from partite inner join digimon on digimon.idutente = ? and partite.idpartita = ?;");
+		
+		prepareStatement.setString(1, idcreatore);
+		prepareStatement.setInt(2, id);
 		ResultSet risultato2 = prepareStatement.executeQuery();
 		while (risultato2.next()) {
-			String idCreatore = risultato2.getString(1);
-			String nome = risultato2.getString(3);
+			String idCreatore = risultato2.getString(9);
+			String nome = risultato2.getString(2);
 			int attacco = risultato2.getInt(4);
 			int difesa = risultato2.getInt(5);
 			int res = risultato2.getInt(6);
-			int hp = risultato2.getInt(7);
-			String evo = risultato2.getString(8);
-			String tipo = risultato2.getString(9);
+			int hp = risultato2.getInt(3);
+			String evo = risultato2.getString(7);
+			String tipo = risultato2.getString(8);
 
 			Digimon d = new Digimon(nome, attacco, difesa, res, hp, evo, tipo, idCreatore);
 			g.getListaDigimonCreatore().add(d);
+			
+	
+			System.out.println(g.getListaDigimonCreatore());
+		}
+
+	}
+	
+	public void riempimentoListaSfidante(int id, GestioneTurniDigimon g, String idsfidante) throws SQLException, ClassNotFoundException{
+		
+		PreparedStatement prepareStatement = getConnessione().prepareStatement(
+				"SELECT digimon.*  from partite inner join digimon on digimon.id = ? and partite.idpartita = ?;");
+		prepareStatement.setString(1, idsfidante);
+		prepareStatement.setInt(2, id);
+		ResultSet risultato2 = prepareStatement.executeQuery();
+		while (risultato2.next()) {
+			String idSfidante = risultato2.getString(9);
+			String nome = risultato2.getString(2);
+			int attacco = risultato2.getInt(4);
+			int difesa = risultato2.getInt(5);
+			int res = risultato2.getInt(6);
+			int hp = risultato2.getInt(3);
+			String evo = risultato2.getString(7);
+			String tipo = risultato2.getString(8);
+
+			Digimon d = new Digimon(nome, attacco, difesa, res, hp, evo, tipo, idSfidante);
+			g.getListaDigimonSfidante().add(d);
+			System.out.println(g.getListaDigimonSfidante());
 		}
 
 	}

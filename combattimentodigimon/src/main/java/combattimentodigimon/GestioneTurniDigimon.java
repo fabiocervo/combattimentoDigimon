@@ -373,4 +373,12 @@ public class GestioneTurniDigimon {
 		}
 
 	}
+
+	@Override
+	public String toString() {
+		return "GestioneTurniDigimon [listaDigimonCreatore=" + listaDigimonCreatore + ", listaDigimonSfidante="
+				+ listaDigimonSfidante + "]";
+	}
+	
+	
 }

@@ -13,6 +13,7 @@ public class MainCreazione {
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		Scanner scanner = new Scanner(System.in);
 		GestioneCaratteristicheDigimon g = new GestioneCaratteristicheDigimon();
+		GestioneTurniDigimon gT = new GestioneTurniDigimon();
 		Gestione gest = new Gestione();
 
 		while (true) {
@@ -42,6 +43,12 @@ public class MainCreazione {
 			    gest.creaPartitaSfidante(scanner);
 				break;
 			}
+			
+			case 5:{
+				
+				//gest.chiamaPartita(scanner, gT, idpartita);
+				break;
+			}
 
 			default: {
 				scanner.close();
@@ -58,6 +65,7 @@ public class MainCreazione {
 		System.out.println("2. crea digimon e scegli il suo proprietario");
 		System.out.println("3. crea partita creatore");
 		System.out.println("4. crea partita sfidante");
+		System.out.println("5. chiama partita");
 
 	}
 
