@@ -210,6 +210,7 @@ public class Gestione {
 		return posizione;
 	}
 
+	
 	public void popolamentoDigimon(Digimon digimon) throws SQLException {
 		String queryInserimentoDigimon = "INSERT INTO digimon (nome, hp, atk, def, res, evo, tipo, idutente) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 		PreparedStatement prepareStatement = getConnessione().prepareStatement(queryInserimentoDigimon);
