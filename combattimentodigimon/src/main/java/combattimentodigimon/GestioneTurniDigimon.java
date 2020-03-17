@@ -8,8 +8,7 @@ public class GestioneTurniDigimon {
 
 	private List<Digimon> listaDigimonCreatore;
 	private List<Digimon> listaDigimonSfidante;
-	private String creatore;
-	private String sfidante;
+	
 
 	public GestioneTurniDigimon() {
 		this.listaDigimonCreatore = new ArrayList<>();
@@ -38,16 +37,18 @@ public class GestioneTurniDigimon {
 		String digi1 = getListaDigimonCreatore().get(0).getNome();
 		String digi2 = getListaDigimonCreatore().get(1).getNome();
 		String digi3 = getListaDigimonCreatore().get(2).getNome();
-		
-			g.popolamentoArenaAttacco(idPartita, digi1, idUtente);
+		    g.popolamentoArenaAttacco(idPartita, digi1, idUtente);
+		    gestioneLottaCreatore(0);
 		} else {
 			String digi4 = getListaDigimonSfidante().get(0).getNome();
 			String digi5 = getListaDigimonSfidante().get(1).getNome();
 			String digi6 = getListaDigimonSfidante().get(2).getNome();
 			g.popolamentoArenaDifesa(digi4, idPartita);
+			gestioneLottaSfidante(0);
 		}
 		
 	}
+   
     
 	public void gestioneLottaCreatore(int i) {
 
@@ -65,6 +66,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
 				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
+				System.out.println(this.getListaDigimonSfidante().get(i).getHp());
 
 			}
 
@@ -76,7 +78,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
 				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonSfidante().get(i).getHp());
 			}
 
 			if (this.getListaDigimonSfidante().get(i).getTipo() == "fuoco") {
@@ -87,7 +89,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
 				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonSfidante().get(i).getHp());
 			}
 
 		}
@@ -103,7 +105,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
 				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonSfidante().get(i).getHp());
 			}
 
 			if (this.getListaDigimonSfidante().get(i).getTipo() == "acqua") {
@@ -114,7 +116,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
 				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonSfidante().get(i).getHp());
 			}
 
 			if (this.getListaDigimonSfidante().get(i).getTipo() == "terra") {
@@ -125,7 +127,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
 				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonSfidante().get(i).getHp());
 			}
 
 		}
@@ -142,7 +144,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
 				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonSfidante().get(i).getHp());
 			}
 
 			if (this.getListaDigimonSfidante().get(i).getTipo() == "terra") {
@@ -153,7 +155,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
 				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonSfidante().get(i).getHp());
 			}
 
 			if (this.getListaDigimonSfidante().get(i).getTipo() == "acqua") {
@@ -164,7 +166,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
 				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonSfidante().get(i).getHp());
 			}
 
 		}
@@ -181,7 +183,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
 				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonSfidante().get(i).getHp());
 			}
 
 			if (this.getListaDigimonSfidante().get(i).getTipo() == "fuoco") {
@@ -192,7 +194,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
 				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonSfidante().get(i).getHp());
 			}
 
 			if (this.getListaDigimonSfidante().get(i).getTipo() == "aria") {
@@ -203,7 +205,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonSfidante().get(i).getRes()) / 100));
 
 				this.getListaDigimonSfidante().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonSfidante().get(i).getHp());
 			}
 
 		}
@@ -236,7 +238,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
 
 				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonCreatore().get(i).getHp());
 			}
 
 			if (this.getListaDigimonCreatore().get(i).getTipo() == "aria") {
@@ -247,7 +249,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
 
 				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonCreatore().get(i).getHp());
 			}
 
 			if (this.getListaDigimonCreatore().get(i).getTipo() == "fuoco") {
@@ -258,7 +260,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
 
 				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonCreatore().get(i).getHp());
 			}
 
 		}
@@ -275,7 +277,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
 
 				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonCreatore().get(i).getHp());
 			}
 
 			if (this.getListaDigimonCreatore().get(i).getTipo() == "acqua") {
@@ -286,7 +288,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
 
 				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonCreatore().get(i).getHp());
 			}
 
 			if (this.getListaDigimonCreatore().get(i).getTipo() == "terra") {
@@ -297,7 +299,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
 
 				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonCreatore().get(i).getHp());
 			}
 
 		}
@@ -315,7 +317,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
 
 				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonCreatore().get(i).getHp());
 			}
 
 			if (this.getListaDigimonCreatore().get(i).getTipo() == "terra") {
@@ -326,7 +328,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
 
 				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonCreatore().get(i).getHp());
 			}
 
 			if (this.getListaDigimonCreatore().get(i).getTipo() == "acqua") {
@@ -337,7 +339,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
 
 				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonCreatore().get(i).getHp());
 			}
 
 		}
@@ -355,7 +357,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
 
 				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonCreatore().get(i).getHp());
 			}
 
 			if (this.getListaDigimonCreatore().get(i).getTipo() == "fuoco") {
@@ -366,7 +368,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
 
 				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonCreatore().get(i).getHp());
 			}
 
 			if (this.getListaDigimonCreatore().get(i).getTipo() == "aria") {
@@ -377,7 +379,7 @@ public class GestioneTurniDigimon {
 								* ((this.getListaDigimonCreatore().get(i).getRes()) / 100));
 
 				this.getListaDigimonCreatore().get(i).setHp(hpnuovi);
-
+				System.out.println(this.getListaDigimonCreatore().get(i).getHp());
 			}
 
 		}
