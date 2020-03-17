@@ -38,16 +38,22 @@ public class GestioneTurniDigimon {
 			g.popolamentoArenaAttacco(idPartita, digi1, idUtente);
 
 			return getListaDigimonCreatore().get(0);
-
-		} else {
+		} return null;
+		}
+   public Digimon impostazioneDifesa(Gestione g, int idPartita, String idUtente)throws SQLException {
+		if(!g.checkUtente(idPartita).equals(idUtente)) {
 			String digi4 = getListaDigimonSfidante().get(0).getNome();
 
 			g.popolamentoArenaDifesa(digi4, idPartita);
 			return getListaDigimonSfidante().get(0);
-		}
-
-	}
-
+		} return null;
+   }
+	
+   public void lottaDigimon(Gestione g, int idPartita, String idUtente) throws SQLException {
+	   gestioneLottaCreatore(impostazioneAttaccoDifesa(g, idPartita, idUtente), impostazioneDifesa(g, idPartita, idUtente));
+   }
+   
+   
 	public void gestioneLottaCreatore(Digimon digimon1, Digimon digimon2) {
 
 		// acqua DANNI NORMALI terra acqua DANNI SFAVOREVOLI aria DANNI FAVOREVOLI fuoco

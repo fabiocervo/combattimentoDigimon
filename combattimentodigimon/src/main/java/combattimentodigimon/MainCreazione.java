@@ -48,7 +48,7 @@ public class MainCreazione {
 				scanner.nextLine();
 				gest.chiamaPartita(gT, idPartita);
 				Thread.sleep(5000);
-				gT.impostazioneAttaccoDifesa(gest, idPartita, idUtente);
+				
 				
 				break;
 			}
@@ -61,7 +61,7 @@ public class MainCreazione {
 				scanner.nextLine();
 				gest.chiamaPartitaSfidante(gT, idPartita);
 				Thread.sleep(10000);
-				gT.impostazioneAttaccoDifesa(gest, idPartita, idUtente);
+				gT.gestioneLottaCreatore(gT.impostazioneAttaccoDifesa(gest, idPartita, idUtente), gT.impostazioneDifesa(gest, idPartita, idUtente));
 			
 				break;
 			}
