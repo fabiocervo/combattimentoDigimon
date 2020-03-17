@@ -45,7 +45,10 @@ public class GestioneTurniDigimon {
 			g.popolamentoArenaDifesa(digi4, idPartita);
 			
 		}
-		 gestioneLottaCreatore(0);
+		for (int i = 0; i < listaDigimonCreatore.size(); i++) {
+			 gestioneLottaCreatore(0);
+		}
+		
 
 	}
    
