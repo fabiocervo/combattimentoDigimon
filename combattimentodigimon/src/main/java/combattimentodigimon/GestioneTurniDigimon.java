@@ -1,5 +1,6 @@
 package combattimentodigimon;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +29,25 @@ public class GestioneTurniDigimon {
 	public void setListaDigimonSfidante(List<Digimon> listaDigimonSfidante) {
 		this.listaDigimonSfidante = listaDigimonSfidante;
 	}
+	
+	public void impostazioneAttaccoDifesa(Gestione g, int idPartita, String idUtente) throws SQLException{
+		
+		
+		if (g.checkUtente(idPartita).equals(idUtente)) {
+			
+			this.getListaDigimonCreatore().get(0).getAtk();
+			
+		}else {
+			this.getListaDigimonSfidante().get(0).getDef();
+		}
+		
+		
+	}
 
-	public void turnoCreatore(int i) {
+
+		
+	
+	public void gestioneLottaCreatore(int i) {
 
 		// acqua DANNI NORMALI terra acqua DANNI SFAVOREVOLI aria DANNI FAVOREVOLI fuoco
 
@@ -199,7 +217,7 @@ public class GestioneTurniDigimon {
 		}
 	}
 
-	public void turnoSfidante(int i) {
+	public void gestioneLottaSfidante(int i) {
 
 		// acqua DANNI NORMALI terra acqua DANNI SFAVOREVOLI aria DANNI FAVOREVOLI fuoco
 

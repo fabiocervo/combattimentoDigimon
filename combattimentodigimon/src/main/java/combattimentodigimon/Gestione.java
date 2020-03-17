@@ -56,8 +56,8 @@ public class Gestione {
 	public void creaPartitaPerCreatore(Scanner scanner) throws SQLException {
 		System.out.println("dammi la password per accedere alla partita");
 		String password = scanner.nextLine();
-		PreparedStatement prepareStatement = getConnessione().prepareStatement(
-				"select id, nome from digimon where idutente = ?;");
+		PreparedStatement prepareStatement = getConnessione()
+				.prepareStatement("select id, nome from digimon where idutente = ?;");
 		prepareStatement.setString(1, chiamaCreatore(scanner));
 		ResultSet executeQuery = prepareStatement.executeQuery();
 		while (executeQuery.next()) {
@@ -75,11 +75,11 @@ public class Gestione {
 		popolamentoPartitaCreatore(g1);
 	}
 
-	public void creaPartitaSfidante(Scanner scanner) throws SQLException {
+	public void uniscitiAllaPartita(Scanner scanner) throws SQLException {
 		System.out.println("dammi la password per accedere alla partita");
 		String password = scanner.nextLine();
-		PreparedStatement prepareStatement2 = getConnessione().prepareStatement(
-				"select id, nome from digimon where idutente = ?;");
+		PreparedStatement prepareStatement2 = getConnessione()
+				.prepareStatement("select id, nome from digimon where idutente = ?;");
 		prepareStatement2.setString(1, chiamaSfidante(scanner));
 		ResultSet executeQuery2 = prepareStatement2.executeQuery();
 		while (executeQuery2.next()) {
@@ -224,8 +224,7 @@ public class Gestione {
 		prepareStatement.execute();
 	}
 
-	public void chiamaPartita(GestioneTurniDigimon g, int idpartita)
-			throws SQLException, ClassNotFoundException {
+	public void chiamaPartita(GestioneTurniDigimon g, int idpartita) throws SQLException, ClassNotFoundException {
 		PreparedStatement statement = getConnessione()
 				.prepareStatement("SELECT idcreatore,idsfidante FROM ExmDFToJYb.partite where idpartita = ?;");
 		statement.setInt(1, idpartita);
@@ -292,17 +291,17 @@ public class Gestione {
 		ResultSet risultato2 = prepareStatement.executeQuery();
 		while (risultato2.next()) {
 			String nome = risultato2.getString(2);
-			int hp = risultato2.getInt(3);			
+			int hp = risultato2.getInt(3);
 			int attacco = risultato2.getInt(4);
 			int difesa = risultato2.getInt(5);
-			int res = risultato2.getInt(6);			
+			int res = risultato2.getInt(6);
 			String evo = risultato2.getString(7);
 			String tipo = risultato2.getString(8);
-            String idSfidante = risultato2.getString(9);
-            
+			String idSfidante = risultato2.getString(9);
+
 			Digimon d = new Digimon(nome, attacco, difesa, res, hp, evo, tipo, idSfidante);
 			g.getListaDigimonSfidante().add(d);
-			
+
 			System.out.println(g.getListaDigimonSfidante());
 		}
 
@@ -319,6 +318,7 @@ public class Gestione {
 		}
 
 	}
+
 	public void stampaIdPartitaSfidante(String idSfidante) throws SQLException {
 		PreparedStatement statement = getConnessione().prepareStatement(
 				"select utenti.nome,partite.idpartita from utenti inner join partite on utenti.id = partite.idsfidante where idcreatore =? or idsfidante=?;");
@@ -330,6 +330,31 @@ public class Gestione {
 		}
 
 	}
-
 	
+	public String checkUtente(int idPartita) throws SQLException{
+		PreparedStatement stat = getConnessione().prepareStatement("select idcreatore from partite where idpartita = ?;");
+		stat.setInt(1, idPartita);
+		ResultSet ris = stat.executeQuery();
+		while(ris.next()) {
+			String idCreatore = ris.getString(2);
+			return idCreatore;
+		}
+		return null;
+	}
+
+	public String gestisciMossaArena(int idpartita) throws SQLException {
+		PreparedStatement statement = getConnessione()
+				.prepareStatement("select* , max(idmossa) from arena where idpartita = ?;");
+		statement.setInt(1, idpartita);
+
+		ResultSet risultato = statement.executeQuery();
+		while (risultato.next()) {
+
+			String idGiocatore = risultato.getString(3);
+			return idGiocatore;
+		}
+		return null;
+
+	}
+
 }
