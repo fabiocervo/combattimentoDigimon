@@ -8,6 +8,8 @@ public class GestioneTurniDigimon {
 
 	private List<Digimon> listaDigimonCreatore;
 	private List<Digimon> listaDigimonSfidante;
+	private String creatore;
+	private String sfidante;
 
 	public GestioneTurniDigimon() {
 		this.listaDigimonCreatore = new ArrayList<>();
@@ -31,17 +33,20 @@ public class GestioneTurniDigimon {
 	}
 
 	public void impostazioneAttaccoDifesa(Gestione g, int idPartita, String idUtente) throws SQLException {
-		
+		String digi1 = getListaDigimonCreatore().get(0).getNome();
+		String digi2 = getListaDigimonCreatore().get(1).getNome();
+		String digi3 = getListaDigimonCreatore().get(2).getNome();
+		String digi4 = getListaDigimonSfidante().get(0).getNome();
+		String digi5 = getListaDigimonSfidante().get(1).getNome();
+		String digi6 = getListaDigimonSfidante().get(2).getNome();
 		if (g.checkUtente(idPartita).equals(idUtente)) {
-
-			gestioneLottaCreatore(0);
-
+			g.popolamentoArenaAttacco(idPartita, digi1, idUtente);
 		} else {
-			gestioneLottaSfidante(0);
+			g.popolamentoArenaDifesa(digi4, idPartita);
 		}
-
+		
 	}
-
+    
 	public void gestioneLottaCreatore(int i) {
 
 		// acqua DANNI NORMALI terra acqua DANNI SFAVOREVOLI aria DANNI FAVOREVOLI fuoco

@@ -47,6 +47,7 @@ public class MainCreazione {
 				int idPartita = scanner.nextInt();
 				scanner.nextLine();
 				gest.chiamaPartita(gT, idPartita);
+				gT.impostazioneAttaccoDifesa(gest, idPartita, idUtente);
 				break;
 			}
 			case 6: {
@@ -57,6 +58,7 @@ public class MainCreazione {
 				int idPartita = scanner.nextInt();
 				scanner.nextLine();
 				gest.chiamaPartitaSfidante(gT, idPartita);
+				gT.impostazioneAttaccoDifesa(gest, idPartita, idUtente);
 				break;
 			}
 

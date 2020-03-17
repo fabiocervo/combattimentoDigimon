@@ -223,17 +223,17 @@ public class Gestione {
 		prepareStatement.execute();
 	}
 
-	public void chiamaPartita(GestioneTurniDigimon g, int idpartita) throws SQLException, ClassNotFoundException {
+	public void chiamaPartita(GestioneTurniDigimon g, int idPartita) throws SQLException, ClassNotFoundException {
 		PreparedStatement statement = getConnessione()
 				.prepareStatement("SELECT idcreatore,idsfidante FROM ExmDFToJYb.partite where idpartita = ?;");
-		statement.setInt(1, idpartita);
+		statement.setInt(1, idPartita);
 		ResultSet risultato = statement.executeQuery();
 		while (risultato.next()) {
 			String idcreatore = risultato.getString(1);
 			String idsfidante = risultato.getString(2);
 			System.out.println(idcreatore + " " + idsfidante);
-			riempimentoListaCreatore(idpartita, g, idcreatore);
-
+			riempimentoListaCreatore(idPartita, g, idcreatore);
+		    
 		}
 	}
 
@@ -357,20 +357,20 @@ public class Gestione {
 
 	}
 
-	public void popolamentoArenaAttacco(int idPartita, int idDigimon, String idUtente) throws SQLException {
+	public void popolamentoArenaAttacco(int idPartita, String nomeDigimon, String idUtente) throws SQLException {
 		String queryInserimentoDigimon = "INSERT INTO arena (idpartita, turno, attacco) VALUES (?, ?, ?);";
 		PreparedStatement prepareStatement = getConnessione().prepareStatement(queryInserimentoDigimon);
 		prepareStatement.setInt(1, idPartita);
 		prepareStatement.setString(3, idUtente);
-		prepareStatement.setInt(4, idDigimon);
+		prepareStatement.setString(4, nomeDigimon);
 		prepareStatement.execute();
 	}
 
-	public void popolamentoArenaDifesa(int idDigimon, int idPartita) throws SQLException {
+	public void popolamentoArenaDifesa(String nomeDigimon, int idPartita) throws SQLException {
 		String queryInserimentoDigimon = "UPDATE arena set difesa = ? where idpartita = ?;";
 		PreparedStatement prepareStatement = getConnessione().prepareStatement(queryInserimentoDigimon);
-		prepareStatement.setInt(1, idPartita);
-		prepareStatement.setInt(5, idDigimon);
+		prepareStatement.setInt(2, idPartita);
+		prepareStatement.setString(1, nomeDigimon);
 		prepareStatement.execute();
 	}
 }
