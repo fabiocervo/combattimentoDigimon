@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Scanner;
 
 public class Gestione {
@@ -330,12 +329,13 @@ public class Gestione {
 		}
 
 	}
-	
-	public String checkUtente(int idPartita) throws SQLException{
-		PreparedStatement stat = getConnessione().prepareStatement("select idcreatore from partite where idpartita = ?;");
+
+	public String checkUtente(int idPartita) throws SQLException {
+		PreparedStatement stat = getConnessione()
+				.prepareStatement("select idcreatore from partite where idpartita = ?;");
 		stat.setInt(1, idPartita);
 		ResultSet ris = stat.executeQuery();
-		while(ris.next()) {
+		while (ris.next()) {
 			String idCreatore = ris.getString(2);
 			return idCreatore;
 		}
@@ -357,4 +357,20 @@ public class Gestione {
 
 	}
 
+	public void popolamentoArenaAttacco(int idPartita, int idDigimon, String idUtente) throws SQLException {
+		String queryInserimentoDigimon = "INSERT INTO arena (idpartita, turno, attacco) VALUES (?, ?, ?);";
+		PreparedStatement prepareStatement = getConnessione().prepareStatement(queryInserimentoDigimon);
+		prepareStatement.setInt(1, idPartita);
+		prepareStatement.setString(3, idUtente);
+		prepareStatement.setInt(4, idDigimon);
+		prepareStatement.execute();
+	}
+
+	public void popolamentoArenaDifesa(int idDigimon, int idPartita) throws SQLException {
+		String queryInserimentoDigimon = "UPDATE arena set difesa = ? where idpartita = ?;";
+		PreparedStatement prepareStatement = getConnessione().prepareStatement(queryInserimentoDigimon);
+		prepareStatement.setInt(1, idPartita);
+		prepareStatement.setInt(5, idDigimon);
+		prepareStatement.execute();
+	}
 }

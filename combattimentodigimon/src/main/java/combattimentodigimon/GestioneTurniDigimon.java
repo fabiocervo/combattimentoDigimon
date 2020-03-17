@@ -29,24 +29,19 @@ public class GestioneTurniDigimon {
 	public void setListaDigimonSfidante(List<Digimon> listaDigimonSfidante) {
 		this.listaDigimonSfidante = listaDigimonSfidante;
 	}
-	
-	public void impostazioneAttaccoDifesa(Gestione g, int idPartita, String idUtente) throws SQLException{
-		
+
+	public void impostazioneAttaccoDifesa(Gestione g, int idPartita, String idUtente) throws SQLException {
 		
 		if (g.checkUtente(idPartita).equals(idUtente)) {
-			
-			this.getListaDigimonCreatore().get(0).getAtk();
-			
-		}else {
-			this.getListaDigimonSfidante().get(0).getDef();
+
+			gestioneLottaCreatore(0);
+
+		} else {
+			gestioneLottaSfidante(0);
 		}
-		
-		
+
 	}
 
-
-		
-	
 	public void gestioneLottaCreatore(int i) {
 
 		// acqua DANNI NORMALI terra acqua DANNI SFAVOREVOLI aria DANNI FAVOREVOLI fuoco
@@ -209,8 +204,8 @@ public class GestioneTurniDigimon {
 		if (this.getListaDigimonSfidante().get(i).getHp() == 0) {
 			System.out.println(this.getListaDigimonCreatore().get(i) + " ha vinto contro "
 					+ this.getListaDigimonSfidante().get(i));
-		} 
-		
+		}
+
 		else if (this.getListaDigimonCreatore().get(i).getHp() == 0) {
 			System.out.println(this.getListaDigimonSfidante().get(i) + " ha vinto contro "
 					+ this.getListaDigimonCreatore().get(i));
@@ -383,8 +378,8 @@ public class GestioneTurniDigimon {
 		if (this.getListaDigimonCreatore().get(i).getHp() == 0) {
 			System.out.println(this.getListaDigimonSfidante().get(i) + " ha vinto contro "
 					+ this.getListaDigimonCreatore().get(i));
-		} 
-		
+		}
+
 		else if (this.getListaDigimonSfidante().get(i).getHp() == 0) {
 			System.out.println(this.getListaDigimonCreatore().get(i) + " ha vinto contro "
 					+ this.getListaDigimonSfidante().get(i));
@@ -397,6 +392,5 @@ public class GestioneTurniDigimon {
 		return "GestioneTurniDigimon [listaDigimonCreatore=" + listaDigimonCreatore + ", listaDigimonSfidante="
 				+ listaDigimonSfidante + "]";
 	}
-	
-	
+
 }
