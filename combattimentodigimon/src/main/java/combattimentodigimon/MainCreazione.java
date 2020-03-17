@@ -62,7 +62,7 @@ public class MainCreazione {
 				gest.chiamaPartitaSfidante(gT, idPartita);
 				Thread.sleep(10000);
 				gT.impostazioneAttaccoDifesa(gest, idPartita, idUtente);
-				gT.gestioneLottaCreatore();
+			
 				break;
 			}
 
