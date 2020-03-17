@@ -35,7 +35,7 @@ public class MainCreazione {
 			}
 
 			case 4: {
-				gest.creaPartitaSfidante(scanner);
+				gest.uniscitiAllaPartita(scanner);
 				break;
 			}
 
@@ -74,8 +74,9 @@ public class MainCreazione {
 		System.out.println("1. crea utente");
 		System.out.println("2. crea digimon e scegli il suo proprietario");
 		System.out.println("3. crea partita creatore");
-		System.out.println("4. crea partita sfidante");
+		System.out.println("4. unisciti alla partita");
 		System.out.println("5. chiama partita");
+		System.out.println("6. chiama partita sfidante ");
 
 	}
 
