@@ -38,15 +38,15 @@ public class GestioneTurniDigimon {
 		String digi2 = getListaDigimonCreatore().get(1).getNome();
 		String digi3 = getListaDigimonCreatore().get(2).getNome();
 		    g.popolamentoArenaAttacco(idPartita, digi1, idUtente);
-		    gestioneLottaCreatore(0);
-		} else {
+		   		} else {
 			String digi4 = getListaDigimonSfidante().get(0).getNome();
 			String digi5 = getListaDigimonSfidante().get(1).getNome();
 			String digi6 = getListaDigimonSfidante().get(2).getNome();
 			g.popolamentoArenaDifesa(digi4, idPartita);
-			gestioneLottaSfidante(0);
+			
 		}
-		
+		 gestioneLottaCreatore(0);
+
 	}
    
     
