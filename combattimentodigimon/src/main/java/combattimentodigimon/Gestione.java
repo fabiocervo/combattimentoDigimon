@@ -344,7 +344,7 @@ public class Gestione {
 
 	public String gestisciMossaArena(int idpartita) throws SQLException {
 		PreparedStatement statement = getConnessione()
-				.prepareStatement("select* , max(idmossa) from arena where idpartita = ?;");
+				.prepareStatement("select turno, max(idmossa) from arena where idpartita = ? group by turno;");
 		statement.setInt(1, idpartita);
 
 		ResultSet risultato = statement.executeQuery();
