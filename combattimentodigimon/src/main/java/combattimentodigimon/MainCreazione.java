@@ -47,8 +47,9 @@ public class MainCreazione {
 				int idPartita = scanner.nextInt();
 				scanner.nextLine();
 				gest.chiamaPartita(gT, idPartita);
-				Thread.sleep(10000);
+				Thread.sleep(5000);
 				gT.impostazioneAttaccoDifesa(gest, idPartita, idUtente);
+				
 				break;
 			}
 			case 6: {
@@ -59,7 +60,9 @@ public class MainCreazione {
 				int idPartita = scanner.nextInt();
 				scanner.nextLine();
 				gest.chiamaPartitaSfidante(gT, idPartita);
+				Thread.sleep(10000);
 				gT.impostazioneAttaccoDifesa(gest, idPartita, idUtente);
+				gT.gestioneLottaCreatore();
 				break;
 			}
 
