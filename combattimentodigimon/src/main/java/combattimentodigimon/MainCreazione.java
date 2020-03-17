@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class MainCreazione {
 
-	public static void main(String[] args) throws SQLException, ClassNotFoundException {
+	public static void main(String[] args) throws SQLException, ClassNotFoundException, InterruptedException {
 		Scanner scanner = new Scanner(System.in);
 		GestioneCaratteristicheDigimon g = new GestioneCaratteristicheDigimon();
 		GestioneTurniDigimon gT = new GestioneTurniDigimon();
@@ -47,6 +47,7 @@ public class MainCreazione {
 				int idPartita = scanner.nextInt();
 				scanner.nextLine();
 				gest.chiamaPartita(gT, idPartita);
+				Thread.sleep(10000);
 				gT.impostazioneAttaccoDifesa(gest, idPartita, idUtente);
 				break;
 			}
