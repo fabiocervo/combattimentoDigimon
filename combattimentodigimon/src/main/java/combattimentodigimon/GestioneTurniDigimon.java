@@ -36,12 +36,13 @@ public class GestioneTurniDigimon {
 		String digi1 = getListaDigimonCreatore().get(0).getNome();
 		String digi2 = getListaDigimonCreatore().get(1).getNome();
 		String digi3 = getListaDigimonCreatore().get(2).getNome();
-		String digi4 = getListaDigimonSfidante().get(0).getNome();
-		String digi5 = getListaDigimonSfidante().get(1).getNome();
-		String digi6 = getListaDigimonSfidante().get(2).getNome();
+		
 		if (g.checkUtente(idPartita).equals(idUtente)) {
 			g.popolamentoArenaAttacco(idPartita, digi1, idUtente);
 		} else {
+			String digi4 = getListaDigimonSfidante().get(0).getNome();
+			String digi5 = getListaDigimonSfidante().get(1).getNome();
+			String digi6 = getListaDigimonSfidante().get(2).getNome();
 			g.popolamentoArenaDifesa(digi4, idPartita);
 		}
 		

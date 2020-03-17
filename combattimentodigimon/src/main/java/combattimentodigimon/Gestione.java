@@ -336,7 +336,7 @@ public class Gestione {
 		stat.setInt(1, idPartita);
 		ResultSet ris = stat.executeQuery();
 		while (ris.next()) {
-			String idCreatore = ris.getString(2);
+			String idCreatore = ris.getString(1);
 			return idCreatore;
 		}
 		return null;
@@ -361,8 +361,8 @@ public class Gestione {
 		String queryInserimentoDigimon = "INSERT INTO arena (idpartita, turno, attacco) VALUES (?, ?, ?);";
 		PreparedStatement prepareStatement = getConnessione().prepareStatement(queryInserimentoDigimon);
 		prepareStatement.setInt(1, idPartita);
-		prepareStatement.setString(3, idUtente);
-		prepareStatement.setString(4, nomeDigimon);
+		prepareStatement.setString(2, idUtente);
+		prepareStatement.setString(3, nomeDigimon);
 		prepareStatement.execute();
 	}
 
