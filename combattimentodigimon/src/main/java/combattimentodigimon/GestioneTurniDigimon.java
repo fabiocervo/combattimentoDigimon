@@ -33,11 +33,12 @@ public class GestioneTurniDigimon {
 	}
 
 	public void impostazioneAttaccoDifesa(Gestione g, int idPartita, String idUtente) throws SQLException {
+		
+		if (g.checkUtente(idPartita).equals(idUtente)) {
 		String digi1 = getListaDigimonCreatore().get(0).getNome();
 		String digi2 = getListaDigimonCreatore().get(1).getNome();
 		String digi3 = getListaDigimonCreatore().get(2).getNome();
 		
-		if (g.checkUtente(idPartita).equals(idUtente)) {
 			g.popolamentoArenaAttacco(idPartita, digi1, idUtente);
 		} else {
 			String digi4 = getListaDigimonSfidante().get(0).getNome();
