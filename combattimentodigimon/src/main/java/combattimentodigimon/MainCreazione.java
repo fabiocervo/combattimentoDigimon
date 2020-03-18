@@ -46,10 +46,8 @@ public class MainCreazione {
 				System.out.println("scegli id partita");
 				int idPartita = scanner.nextInt();
 				scanner.nextLine();
-				gest.chiamaPartita(gT, idPartita);
-				Thread.sleep(5000);
-				
-				
+				gest.listaDigimonPartita(idPartita, gT);
+			    gT.impostazioneAttaccoDifesaCreatore(gest, idPartita, idUtente);
 				break;
 			}
 			case 6: {
@@ -59,10 +57,17 @@ public class MainCreazione {
 				System.out.println("scegli id partita");
 				int idPartita = scanner.nextInt();
 				scanner.nextLine();
-				gest.chiamaPartitaSfidante(gT, idPartita);
-				Thread.sleep(10000);
-				gT.gestioneLottaCreatore(gT.impostazioneAttaccoDifesa(gest, idPartita, idUtente), gT.impostazioneDifesa(gest, idPartita, idUtente));
-			
+				gest.listaDigimonPartita(idPartita, gT);
+				gT.impostazioneDifesaCreatore(gest, idPartita, idUtente);
+				gT.gestioneLottaCreatore(gT.getListaDigimon().get(0), gT.getListaDigimon().get(3));
+				if (gest.gestisciMossaArena(idPartita).equals(idUtente)) {
+					gT.impostazioneAttaccoDifesaSfidante(gest, idPartita, idUtente);
+					gT.gestioneLottaCreatore( gT.getListaDigimon().get(3), gT.getListaDigimon().get(0));
+				}
+					
+					
+				
+
 				break;
 			}
 

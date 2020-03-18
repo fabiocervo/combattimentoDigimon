@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Gestione {
@@ -232,7 +234,7 @@ public class Gestione {
 			String idcreatore = risultato.getString(1);
 			String idsfidante = risultato.getString(2);
 			System.out.println(idcreatore + " " + idsfidante);
-			riempimentoListaCreatore(idPartita, g, idcreatore);
+		
 		    
 		}
 	}
@@ -247,13 +249,13 @@ public class Gestione {
 			String idcreatore = risultato.getString(1);
 			String idsfidante = risultato.getString(2);
 			System.out.println(idcreatore + " " + idsfidante);
-			riempimentoListaSfidante(idpartita, g, idsfidante);
+		
 
 		}
 
 	}
 
-	public void riempimentoListaCreatore(int id, GestioneTurniDigimon g, String idcreatore)
+	/*public void riempimentoListaCreatore(int id, GestioneTurniDigimon g, String idcreatore)
 			throws SQLException, ClassNotFoundException {
 
 		PreparedStatement prepareStatement = getConnessione().prepareStatement(
@@ -278,9 +280,9 @@ public class Gestione {
 			System.out.println(g.getListaDigimonCreatore());
 		}
 
-	}
+	}*/
 
-	public void riempimentoListaSfidante(int id, GestioneTurniDigimon g, String idsfidante)
+/*	public void riempimentoListaSfidante(int id, GestioneTurniDigimon g, String idsfidante)
 			throws SQLException, ClassNotFoundException {
 
 		PreparedStatement prepareStatement = getConnessione().prepareStatement(
@@ -304,8 +306,52 @@ public class Gestione {
 			System.out.println(g.getListaDigimonSfidante());
 		}
 
-	}
+	}*/
+    public void listaDigimonPartita(int idPartita, GestioneTurniDigimon gT) throws SQLException, ClassNotFoundException{
+    	PreparedStatement prepareStatement = getConnessione().prepareStatement("SELECT dc1, dc2, dc3, ds1, ds2, ds3 from partite where partite.idpartita = ?;");
+		prepareStatement.setInt(1, idPartita);
+		ResultSet risultato2 = prepareStatement.executeQuery();
+		List<Integer> listaId = new ArrayList<>();
+		while (risultato2.next()) {
+			int dc1 = risultato2.getInt(1);
+			int dc2 = risultato2.getInt(2);
+			int dc3 = risultato2.getInt(3);
+			int ds1 = risultato2.getInt(4);
+			int ds2 = risultato2.getInt(5);
+			int ds3 = risultato2.getInt(6);
+			listaId.add(dc1);
+			listaId.add(dc2);
+			listaId.add(dc3);
+			listaId.add(ds1);
+			listaId.add(ds2);
+			listaId.add(ds3);
+			riempiListaDigimonPartita(idPartita, listaId, gT);
+		}
+	
+    }
+    public void riempiListaDigimonPartita(int idPartita, List<Integer> lista, GestioneTurniDigimon gT)throws SQLException, ClassNotFoundException{
+    	for (int i = 0; i < lista.size(); i++) {
+			PreparedStatement prepareStatement = getConnessione().prepareStatement("SELECT digimon.*  from partite inner join digimon on digimon.id = ? where partite.idpartita = ?");
+    	prepareStatement.setInt(1, lista.get(i));
+		prepareStatement.setInt(2, idPartita);
+		ResultSet risultato2 = prepareStatement.executeQuery();
+		while (risultato2.next()) {
+			String nome = risultato2.getString(2);
+			int hp = risultato2.getInt(3);
+			int attacco = risultato2.getInt(4);
+			int difesa = risultato2.getInt(5);
+			int res = risultato2.getInt(6);
+			String evo = risultato2.getString(7);
+			String tipo = risultato2.getString(8);
+			String idUtente = risultato2.getString(9);
 
+			Digimon d = new Digimon(nome, attacco, difesa, res, hp, evo, tipo, idUtente);
+			gT.getListaDigimon().add(d);
+			System.out.println(gT.getListaDigimon());
+		}
+		}
+    	
+    }
 	public void stampaIdPartita(String idCreatore) throws SQLException {
 		PreparedStatement statement = getConnessione().prepareStatement(
 				"select utenti.nome,partite.idpartita from utenti inner join partite on utenti.id = partite.idcreatore where idcreatore =? or idsfidante=?;");
@@ -350,7 +396,7 @@ public class Gestione {
 		ResultSet risultato = statement.executeQuery();
 		while (risultato.next()) {
 
-			String idGiocatore = risultato.getString(3);
+			String idGiocatore = risultato.getString(2);
 			return idGiocatore;
 		}
 		return null;
@@ -373,4 +419,5 @@ public class Gestione {
 		prepareStatement.setString(1, nomeDigimon);
 		prepareStatement.execute();
 	}
+	
 }
